@@ -11,6 +11,8 @@ services:
     image: prom/prometheus
     ports:
       - "9090:9090"
+    volumes:
+      
 
   grafana:
     image: grafana/grafana
