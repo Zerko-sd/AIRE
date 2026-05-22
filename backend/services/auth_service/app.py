@@ -1,17 +1,17 @@
 from fastapi import FastAPI
 import random
 import time
-from prometheus_client import Counter, generate_latest, Histogram
+from prometheus_client import Counter, generate_latest, Histogram, CONTENT_TYPE_LATEST
 from fastapi.responses import Response
 from loguru import logger
 
 app = FastAPI()
 
-REQUEST_COUNT = Counter("request_count", "Total Request Count")
+REQUEST_COUNT = Counter("login_request_total", "Total Login Requests")
 ERROR_COUNT = Counter(
-    "login_errors_total","Total login requests"
+    "login_errors_total","Total Login Errors"
 )
-LATENCY = Histogram("login_latency_seconds", "Login latency")
+LATENCY = Histogram("login_latency_seconds", "Login Latency")
 
 
 
@@ -48,4 +48,4 @@ def health():
 
 @app.get("/metrics")
 def metrics():
-    return Response(generate_latest())
+    return Response(generate_latest(), media_type=CONTENT_TYPE_LATEST)
