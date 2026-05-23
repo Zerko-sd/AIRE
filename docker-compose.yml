@@ -20,3 +20,12 @@ services:
     ports:
       - "3000:3000"
 
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: aire
+    ports: 
+      - "5432:5432"
+

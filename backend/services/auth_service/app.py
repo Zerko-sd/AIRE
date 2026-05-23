@@ -23,7 +23,7 @@ def login():
     dice = random.randint(1,10)
     logger.info("Login request received")
     #simulate slow db
-    if dice > 7:
+    if dice > 6:
         logger.warning("Database responding slowly")
         time.sleep(3)
 
@@ -37,6 +37,11 @@ def login():
             "status" : "error",
             "message": "Database timeout"
         }
+    
+    if dice > 9:
+        ERROR_COUNT.inc()
+        logger.critical("Database connection pool exhausted")
+        raise Exception("DB Crashed")
     
     LATENCY.observe(time.time() - start)
     return {"status":"success"}
