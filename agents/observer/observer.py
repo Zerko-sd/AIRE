@@ -3,6 +3,7 @@ from agents.observer.prometheus_tool import query_prometheus
 from datetime import datetime
 from backend.models.incident import Incident
 from backend.database.save_incident import save_incident
+from tools.prometheus_tool import query_prometheus
 
 ERROR_THRESHOLD =0.05
 
